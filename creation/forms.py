@@ -554,20 +554,17 @@ class UploadKeywordsForm(forms.Form):
 
 class ContributorRoleForm(forms.ModelForm):
     user = forms.ModelChoiceField(
-        cache_choices = True,
         queryset = User.objects.filter(Q(groups__name = 'Contributor')|Q(groups__name = 'External-Contributor')).order_by('username'),
         help_text = "",
         error_messages = {'required': 'User field required.'}
     )
     foss_category = forms.ModelChoiceField(
-        cache_choices = True,
         queryset = FossCategory.objects.filter(status = 1).order_by('foss'),
         empty_label = "----------",
         help_text = "",
         error_messages = {'required': 'FOSS category field required.'}
     )
     language = forms.ModelChoiceField(
-        cache_choices =True,
         queryset = Language.objects.order_by('name'),
         empty_label = "----------",
         help_text = "",
@@ -582,20 +579,17 @@ class ContributorRoleForm(forms.ModelForm):
 
 class DomainReviewerRoleForm(forms.ModelForm):
     user = forms.ModelChoiceField(
-        cache_choices = True,
         queryset = User.objects.filter(Q(groups__name = 'Domain-Reviewer')).order_by('username'),
         help_text = "",
         error_messages = {'required': 'User field required.'}
     )
     foss_category = forms.ModelChoiceField(
-        cache_choices = True,
         queryset = FossCategory.objects.filter(status = 1).order_by('foss'),
         empty_label = "----------",
         help_text = "",
         error_messages = {'required': 'FOSS category field required.'}
     )
     language = forms.ModelChoiceField(
-        cache_choices =True,
         queryset = Language.objects.order_by('name'),
         empty_label = "----------",
         help_text = "", error_messages = {'required': 'Language field required.'}
@@ -608,19 +602,16 @@ class DomainReviewerRoleForm(forms.ModelForm):
 
 class QualityReviewerRoleForm(forms.ModelForm):
     user = forms.ModelChoiceField(
-        cache_choices = True,
         queryset = User.objects.filter(Q(groups__name = 'Quality-Reviewer')).order_by('username'),
         help_text = "", error_messages = {'required': 'User field required.'}
     )
     foss_category = forms.ModelChoiceField(
-        cache_choices = True,
         queryset = FossCategory.objects.filter(status = 1).order_by('foss'),
         empty_label = "----------",
         help_text = "",
         error_messages = {'required': 'FOSS category field required.'}
     )
     language = forms.ModelChoiceField(
-        cache_choices =True,
         queryset = Language.objects.order_by('name'),
         empty_label = "----------",
         help_text = "",
@@ -727,7 +718,6 @@ class TutorialMissingComponentReplyForm(forms.Form):
 
 class SuggestTopicForm(forms.ModelForm):
     difficulty_level = forms.ModelChoiceField(
-        cache_choices = True,
         widget = forms.Select(
             attrs = {'class' : 'ac-state'}),
             queryset = Level.objects.all().order_by('id'),
@@ -790,7 +780,6 @@ class CollaborateForm(forms.ModelForm):
 
 class AvailableFossForm(forms.ModelForm):
     foss = forms.ModelChoiceField(
-        cache_choices = True,
         queryset = FossCategory.objects.filter(status = 1).order_by('foss'),
         empty_label = "----------",
         help_text = "",

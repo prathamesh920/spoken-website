@@ -53,8 +53,6 @@ NO_REPLY_EMAIL = 'no-reply@spoken-tutorial.org'
 DEBUG = DEBUG_MODE
 COMPRESS_ENABLED = True
 
-TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -74,7 +72,7 @@ INSTALLED_APPS = (
     'nicedit',
     'report_builder',
     'compressor',
-
+    'forums',
     'cms',
     'creation',
     'statistics',
@@ -88,6 +86,7 @@ INSTALLED_APPS = (
     'certificate',
     'api',
     'rest_framework',
+    'workshop',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -200,12 +199,29 @@ STATIC_URL = '/static/'
 COMPRESS_ROOT = STATIC_ROOT
 COMPRESS_URL = STATIC_URL
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    BASE_DIR + '/static/',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+        'DIRS': [
+            BASE_DIR + '/static/'
+        ],
+        'OPTIONS':{
+            'context_processors': [
+                "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.media",
+                "django.template.context_processors.static",
+                "django.template.context_processors.tz",
+                "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.request"
+            ],
+            'debug': True,
+            },
+    },
+]
+
 
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -238,16 +254,6 @@ REPORT_BUILDER_INCLUDE = []
 REPORT_BUILDER_EXCLUDE = ['user']  # Allow all models except User to be accessed
 REPORT_BUILDER_ASYNC_REPORT = False
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages",
-    "django.core.context_processors.request"
-)
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
